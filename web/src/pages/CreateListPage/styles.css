@@ -1,0 +1,43 @@
+.container h1 {
+  font: 700 3.2rem Archivo;
+  color: var(--color-pink);
+  margin-bottom: 1.6rem;
+}
+
+.form-container {
+  background: var(--color-grey);
+  margin-top: 80px;
+  width: 100%;
+  min-height: 500px;
+  border-radius: 0.8rem;
+  padding: 3.2rem;
+  overflow-y: auto; 
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.button-container button{
+  background: var(--color-pink);
+  height: 5.6rem;
+  width: 50%;
+  margin-bottom: 1.6rem;
+  border-radius: 0.8rem;
+  border: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2.4rem;
+  text-emphasis: none;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  font: 700 1.6rem Archivo;
+}
+
+.button-container button:hover{
+  background: var(--color-green)
+}

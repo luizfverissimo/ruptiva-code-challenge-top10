@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { FormEvent, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import Input from '../../components/Input'
+import api from '../../services/api'
 
 import './styles.css'
 
@@ -11,7 +13,9 @@ export default function Register() {
   const [errorEmail, setErrorEmail] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
 
-  const submitRegister = (name: string, email: string, password: string) => {
+  const history = useHistory()
+
+  const submitRegister = async (name: string, email: string, password: string, e: FormEvent) => {
     let isValid = true
     if (name === '') {
       setErrorName('O nome não pode estar vazio')
@@ -37,7 +41,23 @@ export default function Register() {
       isValid = true
     }
 
-    console.log(isValid)
+    if (isValid) {
+      e.preventDefault()
+
+      try {
+        await api.post('/users/register', {
+            name,
+            email,
+            password
+        })
+
+        alert('Cadastro feito com sucesso')
+        history.push('/')
+
+      } catch (err) {
+        alert('Email já cadastrado ou erro na realização do cadastro')
+      }
+    }
   }
 
   return (
@@ -48,35 +68,33 @@ export default function Register() {
             <h1>Registrar-se</h1>
           </div>
           <form action='' className='login-form'>
-            <legend>Nome ou usuário</legend>
-            <input
+            <Input
+              legend='Nome ou usuário'
+              errorMsg={errorName}
               type='text'
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <p>{errorName}</p>
-
-            <legend>E-mail</legend>
-            <input
+            <Input
+              legend='E-mail'
+              errorMsg={errorEmail}
               type='text'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <p>{errorEmail}</p>
-
-            <legend>Senha</legend>
-            <input
+            <Input
+              legend='Senha'
+              errorMsg={errorPassword}
               type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <p>{errorPassword}</p>
           </form>
           <div className='error-container'></div>
           <div className='button-container'>
             <button
               type='button'
-              onClick={() => submitRegister(name, email, password)}
+              onClick={(e) => submitRegister(name, email, password, e)}
             >
               Registrar-se
             </button>
