@@ -4,7 +4,7 @@ import './styles.css'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   legend: string
-  errorMsg: string
+  errorMsg?: string
 }
 
 const Input: React.FC<InputProps> = ({ legend, value, errorMsg, ...rest }) => {

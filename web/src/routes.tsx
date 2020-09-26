@@ -29,8 +29,8 @@ function Routes() {
     <BrowserRouter>
       <CustomRoute exact path='/' component={Login} />
       <CustomRoute path='/register' component={Register} />
-      <CustomRoute isPrivate path='/list' component={ListPage} />
-      <CustomRoute isPrivate path='/create-list' component={CreateListPage} />
+      <CustomRoute /* isPrivate */ path='/list' component={ListPage} />
+      <CustomRoute /* isPrivate */ path='/create-list' component={CreateListPage} />
     </BrowserRouter>
   )
 }

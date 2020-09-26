@@ -14,12 +14,12 @@
   overflow-y: auto; 
 }
 
-.button-container {
+.button-container-save {
   display: flex;
   align-items: center;
 }
 
-.button-container button{
+.button-container-save button{
   background: var(--color-pink);
   height: 5.6rem;
   width: 50%;
@@ -38,6 +38,6 @@
   font: 700 1.6rem Archivo;
 }
 
-.button-container button:hover{
+.button-container-save button:hover{
   background: var(--color-green)
 }
