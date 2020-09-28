@@ -5,7 +5,7 @@ import db from '../database/connection'
 export default class Top10sController {
   async index(req: Request, res: Response) {
 
-    const top10sLists = await db('top10s').join('users', 'users.id', '=', 'top10s.user_id').select('top10s.id', 'top10s.title', 'top10s.items', 'users.name')
+    const top10sLists = await db('top10s').join('users', 'users.id', '=', 'top10s.user_id').select('top10s.id', 'top10s.title', 'top10s.items', 'users.name', 'top10s.user_id')
 
     return res.json(top10sLists)
   }
@@ -19,7 +19,7 @@ export default class Top10sController {
       })
     }
 
-    const top10sLists = await db('top10s').where('user_id', '=', id)
+    const top10sLists = await db('top10s').join('users', 'users.id', '=', 'top10s.user_id').select('top10s.id', 'top10s.title', 'top10s.items', 'users.name', 'top10s.user_id').where('user_id', '=', id)
 
     return res.json(top10sLists)
   }
@@ -51,7 +51,7 @@ export default class Top10sController {
   }
 
   async delete(req: Request, res: Response) {
-    const { id } = await req.body
+    const { id } = await req.params
     
 
     if (!id) {

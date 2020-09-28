@@ -11,6 +11,6 @@ const top10sController = new Top10sController()
 top10sRoutes.post('/top10s', top10sController.create)
 top10sRoutes.get('/top10s', top10sController.index)
 top10sRoutes.get('/top10s/:id', top10sController.listUserTop10s)
-top10sRoutes.delete('/top10s', top10sController.delete)
+top10sRoutes.delete('/top10s/:id', top10sController.delete)
 
 export default top10sRoutes

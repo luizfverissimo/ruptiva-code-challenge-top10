@@ -1,5 +1,5 @@
 import React, { FormEvent, useState, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Input from '../../components/Input'
 import { Context } from '../../contexts/authContext'
 
@@ -12,8 +12,6 @@ export default function Login() {
   const [errorPassword, setErrorPassword] = useState('')
 
   const { handleLogin } = useContext(Context)
-
-  const history = useHistory()
 
   const submitLogin = async (email: string, password: string, e: FormEvent) => {
     let isValid = true
@@ -36,13 +34,7 @@ export default function Login() {
 
     if (isValid) {
       e.preventDefault()
-
-      try {
-        handleLogin(email, password)
-        history.push('/list')
-      } catch (err) {
-        alert('E-mail ou senha inválido.')
-      }
+      handleLogin(email, password)
     }
   }
 

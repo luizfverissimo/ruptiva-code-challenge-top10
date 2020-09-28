@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
+
 import api from '../services/api'
+import history from '../services/history'
 
 export interface AuthContextInterface {
   authenticated: boolean
@@ -21,6 +23,8 @@ const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
 
+
+
   useEffect(() => {
     const userInfoFromLocalStorage = localStorage.getItem('userInfo')
     if (userInfoFromLocalStorage) {
@@ -39,13 +43,19 @@ const AuthProvider: React.FC = ({ children }) => {
   }, [])
 
   const handleLogin = async (email: string, password: string) => {
-    const { data } = await api.post('/users', { email, password })
-
-    setUser(data.user)
-
-    localStorage.setItem('userInfo', JSON.stringify(data))
-    api.defaults.headers.Authorization = `Bearer ${data.token}`
-    setAuthenticated(true)
+    try{
+      const { data } = await api.post('/users', { email, password })
+      console.log(data)
+      setUser(data.user)
+  
+      localStorage.setItem('userInfo', JSON.stringify(data))
+      api.defaults.headers.Authorization = `Bearer ${data.token}`
+      setAuthenticated(true)
+      history.push('/list')
+    } catch (err) {
+      setAuthenticated(false)
+      alert('E-mail ou senha inválido')
+    }
   }
 
   const handleLogout = () => {
@@ -54,9 +64,13 @@ const AuthProvider: React.FC = ({ children }) => {
     api.defaults.headers.Authorization = undefined
   }
 
+  if(loading){
+    return <h1>Carregando...</h1>
+  }
+
   return (
     <Context.Provider
-      value={{ authenticated, user , loading, handleLogin, handleLogout }}
+      value={{ authenticated, user, loading, handleLogin, handleLogout }}
     >
       {children}
     </Context.Provider>

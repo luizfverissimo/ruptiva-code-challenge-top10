@@ -16,6 +16,7 @@ export default function Register() {
   const history = useHistory()
 
   const submitRegister = async (name: string, email: string, password: string, e: FormEvent) => {
+    const emailLowercase = email.toLowerCase()
     let isValid = true
     if (name === '') {
       setErrorName('O nome não pode estar vazio')
@@ -25,10 +26,11 @@ export default function Register() {
       isValid = true
     }
 
-    if (!/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) {
+    if (!/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(emailLowercase)) {
       setErrorEmail('Digite um e-mail válido')
       isValid = false
-    } else {
+    } else {      
+      setEmail(emailLowercase)
       setErrorEmail('')
       isValid = true
     }
@@ -47,7 +49,7 @@ export default function Register() {
       try {
         await api.post('/users/register', {
             name,
-            email,
+            email: emailLowercase,
             password
         })
 

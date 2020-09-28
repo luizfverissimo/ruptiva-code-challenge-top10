@@ -1,0 +1,49 @@
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.title-container {
+  margin-bottom: 1.6rem;
+}
+
+.title-container h2 {
+  font: 700 2.8rem Archivo;
+  color: var(--color-pink)
+}
+
+.list-content {
+  margin-bottom: 1.6rem;
+}
+
+.list-content li {
+  font: 500 1.8rem Archivo;
+  color: var(--color-pink);
+  list-style: none;
+}
+
+.modal-content button{
+  background: var(--color-pink);
+  height: 5.6rem;
+  width: 200px;
+  margin-bottom: 1.6rem;
+  border-radius: 0.8rem;
+  border: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2.4rem;
+  text-emphasis: none;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  font: 700 1.6rem Archivo;
+}
+
+.modal-content button:hover{
+  background: var(--color-green)
+}

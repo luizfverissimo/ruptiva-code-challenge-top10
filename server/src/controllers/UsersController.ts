@@ -50,22 +50,24 @@ export default class UserController {
   async auth(req: Request, res: Response) {
     const { email, password } = await req.body
 
-    const users = await db('users').where('email', '=', email)
+    try {
+      const users = await db('users').where('email', '=', email)
+      console.log(users)
 
-    if (!users) {
+      const user = users[0]
+  
+      if(!await bcrypt.compare(password, user.password)){
+          return res.status(400).json({error: 'Password is incorrect'})
+        }
+  
+      user.password = undefined
+  
+      return res.status(200).json({user, token: generateToken({id: user.id})})
+    } catch (err) {
       return res.status(400).json({
         error: 'Email is incorrect'
       })
     }
 
-    const user = users[0]
-
-    if(!await bcrypt.compare(password, user.password)){
-        return res.status(400).json({error: 'Password is incorrect'})
-      }
-
-    user.password = undefined
-
-    return res.status(200).json({user, token: generateToken({id: user.id})})
   }
 }

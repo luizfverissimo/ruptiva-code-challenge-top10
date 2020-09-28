@@ -2,7 +2,7 @@ import { Request, Response} from 'express'
 import jwt from 'jsonwebtoken'
 import authConfig from '../config/auth.json'
 
-const authMiddleware = (req: Request, res: Response, next) => {
+const authMiddleware = (req: Request, res: Response, next: Function) => {
   const authHeader = req.headers.authorization
 
   if(!authHeader) res.status(401).send({error: 'No token provided'})

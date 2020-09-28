@@ -40,7 +40,7 @@ const CreateListPage = () => {
     let isValid = true
     if(nameList === '') {
       setErrorNameList('O nome do Top10 não pode estar vazio')
-      let isValid = false
+      isValid = false
     }
 
     setListItems([...listItems, listItems[0] = pos1Item])
@@ -55,12 +55,14 @@ const CreateListPage = () => {
     setListItems([...listItems, listItems[9] =pos10Item])
 
     if(isValid) {
-      const listItemsString = JSON.stringify(listItems)
+      
       await api.post('/top10s', {
         user_id: userInfo.id,
         title: nameList,
-        items: listItemsString
+        items: listItems
       })
+      alert('TOP10 salvo com sucesso!')
+      history.push('/list')
     }
   }
 
