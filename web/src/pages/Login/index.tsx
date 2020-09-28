@@ -13,28 +13,30 @@ export default function Login() {
 
   const { handleLogin } = useContext(Context)
 
+  //Realiza a validação da email e se uma senha foi adicionada
   const submitLogin = async (email: string, password: string, e: FormEvent) => {
-    let isValid = true
+    const emailLowercase = email.toLowerCase()
+    let isValid: Array<boolean> = [false, false]
 
-    if (!/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email)) {
+    if (!/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(emailLowercase)) {
       setErrorEmail('Digite um e-mail válido')
-      isValid = false
+      isValid[0] = false
     } else {
       setErrorEmail('')
-      isValid = true
+      isValid[0] = true
     }
 
-    if (password.length < 1) {
-      setErrorPassword('A senha deve ter no mínimo 8 caracteres')
-      isValid = false
+    if (password.length === 0) {
+      setErrorPassword('Você deve adicionar uma senha')
+      isValid[1] = false
     } else {
       setErrorPassword('')
-      isValid = true
+      isValid[1] = true
     }
 
-    if (isValid) {
+    if (!isValid.includes(false)) {
       e.preventDefault()
-      handleLogin(email, password)
+      handleLogin(emailLowercase, password)
     }
   }
 

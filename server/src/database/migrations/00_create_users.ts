@@ -1,5 +1,6 @@
 import Knex from 'knex'
 
+//Cria o BD de usuários
 export async function up(knex: Knex) {
   return knex.schema.createTable('users', (table) => {
     table.increments('id').primary()

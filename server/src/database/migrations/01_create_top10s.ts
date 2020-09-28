@@ -1,5 +1,6 @@
 import Knex from 'knex'
 
+//Cria o BD de listas
 export async function up(knex: Knex) {
   return knex.schema.createTable('top10s', (table) => {
     table.increments('id').primary()

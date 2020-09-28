@@ -15,35 +15,36 @@ export default function Register() {
 
   const history = useHistory()
 
+  //Realiza o tratamento (lowerCase) e validação do email, valida a senha e submete para ser registrado.
   const submitRegister = async (name: string, email: string, password: string, e: FormEvent) => {
     const emailLowercase = email.toLowerCase()
-    let isValid = true
+    let isValid: Array<boolean> = [false, false, false]
     if (name === '') {
       setErrorName('O nome não pode estar vazio')
-      isValid = false
+      isValid[0] = false
     } else {
       setErrorName('')
-      isValid = true
+      isValid[0] = true
     }
 
     if (!/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(emailLowercase)) {
       setErrorEmail('Digite um e-mail válido')
-      isValid = false
+      isValid[1] = false
     } else {      
       setEmail(emailLowercase)
       setErrorEmail('')
-      isValid = true
+      isValid[1] = true
     }
 
     if (password.length < 8) {
       setErrorPassword('A senha deve ter no mínimo 8 caracteres')
-      isValid = false
+      isValid[2] = false
     } else {
       setErrorPassword('')
-      isValid = true
+      isValid[2] = true
     }
 
-    if (isValid) {
+    if (!isValid.includes(false)) {
       e.preventDefault()
 
       try {

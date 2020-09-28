@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import db from '../database/connection'
 
 export default class Top10sController {
+  //Carrega todas as listas
   async index(req: Request, res: Response) {
 
     const top10sLists = await db('top10s').join('users', 'users.id', '=', 'top10s.user_id').select('top10s.id', 'top10s.title', 'top10s.items', 'users.name', 'top10s.user_id')
@@ -10,6 +11,7 @@ export default class Top10sController {
     return res.json(top10sLists)
   }
 
+  //Carrega as listas de um usuário
   async listUserTop10s(req: Request, res: Response) {
     const { id } = await req.params
 
@@ -24,6 +26,7 @@ export default class Top10sController {
     return res.json(top10sLists)
   }
 
+  //cria uma nova lista
   async create(req: Request, res: Response) {
     const { user_id, title, items } = await req.body
 
@@ -50,6 +53,7 @@ export default class Top10sController {
     }
   }
 
+  //deleta uma lista
   async delete(req: Request, res: Response) {
     const { id } = await req.params
     

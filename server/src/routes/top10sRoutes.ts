@@ -8,6 +8,7 @@ top10sRoutes.use(authMiddleware)
 
 const top10sController = new Top10sController()
 
+//Rotas para carregar listagem, filtrar listagem, cadastrar nova lista e deletar lista.
 top10sRoutes.post('/top10s', top10sController.create)
 top10sRoutes.get('/top10s', top10sController.index)
 top10sRoutes.get('/top10s/:id', top10sController.listUserTop10s)

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Context } from '../../contexts/authContext'
 
 import Header from '../../components/Header'
@@ -27,15 +27,10 @@ export default function ListPage() {
   const [listUserId, setListUserId] = useState(0)
 
   const { handleLogout, loading } = useContext(Context)
+
   const userInfo: any = JSON.parse(localStorage.getItem('userInfo') as string)
 
-  const history = useHistory()
-
-  const logout = () => {
-    handleLogout()
-    history.push('/')
-  }
-
+  //Realiza a requisição de todas as listas.
   const loadAllLists = async () => {
     const { data } = await api.get('/top10s')
     if (data) {
@@ -44,6 +39,7 @@ export default function ListPage() {
     console.log(data)
   }
 
+  //Realiza a requisição e filtragem para as listas do usuário logado.
   const loadUserLists = async (userId: number) => {
     const { data } = await api.get(`/top10s/${userId}`)
     if (data) {
@@ -51,6 +47,7 @@ export default function ListPage() {
     }
   }
 
+  //Função que controla o Modal e passa as informações para o mesmo
   const showModal = (
     list: string,
     title: string,
@@ -65,6 +62,7 @@ export default function ListPage() {
     setVisible(true)
   }
 
+  //Realiza a requisição para a exclusão de uma lista pertencente ao usurário logado.
   const handleDeleteList = async (listId: number) => {
     try {
       await api.delete(`/top10s/${listId}`)
@@ -76,6 +74,7 @@ export default function ListPage() {
     }
   }
 
+  //Carrega todas as lista quando o componente é montado
   useEffect(() => {
     loadAllLists()
   }, [])
@@ -97,7 +96,7 @@ export default function ListPage() {
         onClickDelete={() => handleDeleteList(listId)}
       />
       <div id='list-page'>
-        <Header name={userInfo.user.name} onClick={logout} />
+        <Header name={userInfo.user.name} onClick={() => handleLogout()} />
         <div id='list-page-content' className='container'>
           <div className='new-list-item'>
             <Link to='/create-list'>

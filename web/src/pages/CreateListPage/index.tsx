@@ -30,11 +30,7 @@ const CreateListPage = () => {
 
   const history = useHistory()
 
-  const logout = () => {
-    handleLogout()
-    history.push('/')
-  }
-
+  //Realiza a validação e submete os dados para serem salvos - somente o nome da lista é obrigatório
   const submitNewTop10 = async (nameList: string, e: FormEvent) => {
     e.preventDefault()
     let isValid = true
@@ -68,7 +64,7 @@ const CreateListPage = () => {
 
   return (
     <div id='create-list-page'>
-      <Header name={userInfo.name} onClick={logout} />
+      <Header name={userInfo.name} onClick={() => handleLogout()} />
       <div id='create-list-page-content' className='container'>
         <div className='form-container'>
           <h1>Novo TOP10</h1>

@@ -9,6 +9,7 @@ const generateToken = (params = {}) => {
 }
 
 export default class UserController {
+  //registra novo usuário
   async create(req: Request, res: Response) {
     const { name, email, password } = await req.body
 
@@ -47,6 +48,7 @@ export default class UserController {
     }
   }
 
+  //realiza o login pela verificação de email e senha
   async auth(req: Request, res: Response) {
     const { email, password } = await req.body
 

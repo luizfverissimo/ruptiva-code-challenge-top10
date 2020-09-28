@@ -23,8 +23,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
 
-
-
+  //Sempre que a página é atualizada ele armazena novamente os dados do usuário logado. 
   useEffect(() => {
     const userInfoFromLocalStorage = localStorage.getItem('userInfo')
     if (userInfoFromLocalStorage) {
@@ -42,6 +41,7 @@ const AuthProvider: React.FC = ({ children }) => {
     setLoading(false)
   }, [])
 
+  //Realiza o requisição de login
   const handleLogin = async (email: string, password: string) => {
     try{
       const { data } = await api.post('/users', { email, password })
@@ -58,10 +58,12 @@ const AuthProvider: React.FC = ({ children }) => {
     }
   }
 
+  //Realiza o logout
   const handleLogout = () => {
     setAuthenticated(false)
     localStorage.removeItem('userInfo')
     api.defaults.headers.Authorization = undefined
+    history.push('/')
   }
 
   if(loading){

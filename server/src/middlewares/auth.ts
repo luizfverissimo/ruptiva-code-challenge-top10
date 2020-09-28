@@ -2,6 +2,7 @@ import { Request, Response} from 'express'
 import jwt from 'jsonwebtoken'
 import authConfig from '../config/auth.json'
 
+//Observa se a requisição possui o token JWT, se sim, realiza a ação na rota desejada
 const authMiddleware = (req: Request, res: Response, next: Function) => {
   const authHeader = req.headers.authorization
 

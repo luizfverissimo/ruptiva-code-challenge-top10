@@ -88,8 +88,10 @@
 .list-items button h2 {
   font: 700 2.4rem Archivo;
   color: var(--color-background);
+  text-align: left;
 }
 
 .list-items button p {
+  font: 500 1.6rem Archivo;
   text-align: right;
 }
