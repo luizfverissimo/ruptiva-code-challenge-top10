@@ -1,4 +1,4 @@
-# Ruptiva Code-challenge - Top10
+# Code-challenge - Top10
 
 Projeto fullstack criado para o code-challenge da Ruptiva, ele tem como objetivo armazenar e compartilhar listas de Top10 suas de seus colegas.
 
