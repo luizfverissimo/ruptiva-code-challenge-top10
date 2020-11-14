@@ -1,6 +1,6 @@
 # Code-challenge - Top10
 
-Projeto fullstack criado para o code-challenge da Ruptiva, ele tem como objetivo armazenar e compartilhar listas de Top10 suas de seus colegas.
+Projeto fullstack criado para um code-challenge, ele tem como objetivo armazenar e compartilhar listas de Top10 suas de seus colegas.
 
 Back-end criado com *Node.js + Express*, utilizando base de dados *SQLite3 e Knex* para a manipulação, as senhas foram salvas criptografadas utilizando *Bcrypt* e o token de autorização foi criado pelo *JSON-web-token*.
 
